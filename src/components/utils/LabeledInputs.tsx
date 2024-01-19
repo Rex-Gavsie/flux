@@ -14,6 +14,9 @@ import {
   SliderThumb,
   SliderTrack,
   Textarea,
+  NumberInput,
+  NumberInputField,
+  Flex
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -37,22 +40,38 @@ export function LabeledSlider({
 } & BoxProps) {
   return (
     <Box {...others}>
-      <b>{label}:</b> {value}
+      <Flex align='center' justify-width='stretch'>
+        <Box>
+        <b>{label}: {}</b> 
+        </Box>
+        <NumberInput 
+          mx = '2'
+          maxW = '100px'
+          mr = '1rem'
+          onChange={(v: string) => setValue(Number(v))} 
+          value={value}
+          max={max}
+          min={min} 
+        > 
+            <NumberInputField />
+        </NumberInput>
+      </Flex>
       <Slider
-        mx="2px"
-        aria-label="temp-slider"
-        value={value}
-        onChange={(v) => setValue(v)}
-        max={max}
-        min={min}
-        step={step}
-      >
-        <SliderTrack>
-          <SliderFilledTrack bg={color} />
-        </SliderTrack>
+          mx="2px"
+          aria-label="temp-slider"
+          value={value}
+          onChange={(v) => setValue(v)}
+          max={max}
+          min={min}
+          step={step}
+          focusThumbOnChange={false}
+        >
+          <SliderTrack>
+            <SliderFilledTrack bg={color} />
+          </SliderTrack>
 
-        <SliderThumb />
-      </Slider>
+          <SliderThumb />
+        </Slider>
     </Box>
   );
 }
