@@ -37,7 +37,15 @@ export function LabeledSlider({
   max: number;
   min: number;
   step: number;
-} & BoxProps) {
+  } & BoxProps) {
+  
+    const handleValueChange = (v: string) => {
+      const numericValue = Number(v);
+      if (!isNaN(numericValue) || v[1] == '.') {
+        setValue(v); // This is my work around for not being able to type decimal points if you convert v to a number, however, it doesn't really work as the temperature parameter really wants a number
+      }
+    };
+  
   return (
     <Box {...others}>
       <Flex align='center' justify-width='stretch'>
@@ -47,12 +55,14 @@ export function LabeledSlider({
         <NumberInput 
           mx = '2'
           maxW = '100px'
-          mr = '1rem'
-          onChange={(v: string) => setValue(Number(v))} 
+          mr='1rem'
+          step={0.01}
+          precision={2}
+          onChange={handleValueChange}
           value={value}
           max={max}
-          min={min} 
-        > 
+          min={min}
+        >
             <NumberInputField />
         </NumberInput>
       </Flex>
@@ -60,7 +70,7 @@ export function LabeledSlider({
           mx="2px"
           aria-label="temp-slider"
           value={value}
-          onChange={(v) => setValue(v)}
+          onChange={(v: number) => setValue(v)}
           max={max}
           min={min}
           step={step}
