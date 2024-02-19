@@ -287,8 +287,8 @@ export function Prompt({
             mt={3}
             label="Temperature (randomness)"
             value={settings.temp}
-            setValue={(v: number) => {
-              setSettings({ ...settings, temp: v });
+            setValue={(v: string) => {
+              setSettings({ ...settings, temp: parseFloat(v)}); // this use of parse float and having it be a string feels intuitively wrong
 
               if (MIXPANEL_TOKEN) mixpanel.track("Changed temperature inline");
             }}
@@ -302,8 +302,8 @@ export function Prompt({
             mt={3}
             label="Number of Responses"
             value={settings.n}
-            setValue={(v: number) => {
-              setSettings({ ...settings, n: v });
+            setValue={(v: string) => { //Same here
+              setSettings({ ...settings, n: parseInt(v) });
 
               if (MIXPANEL_TOKEN) mixpanel.track("Changed number of responses inline");
             }}

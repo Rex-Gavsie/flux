@@ -42,7 +42,9 @@ export function LabeledSlider({
     const handleValueChange = (v: string) => {
       const numericValue = Number(v);
       if (!isNaN(numericValue) || v[1] == '.') {
-        setValue(v); // This is my work around for not being able to type decimal points if you convert v to a number, however, it doesn't really work as the temperature parameter really wants a number
+        setValue(v); // Currently, I haven't been able to get this to both give a valid type for temperature (number) and be able to type periods.
+        // To fix this, I'm just gonna change it so that the program attempts to convert the temperature value its given to a number when it makes the API Call
+        // If anyone has a better idea of how to do this, please fix it lmao, I can't imagine this is the right/best way
       }
     };
   
